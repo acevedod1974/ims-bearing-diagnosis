@@ -1,0 +1,38 @@
+# MATLAB
+*.asv
+*.m~
+*.mex*
+*.slxc
+slprj/
+sccprj/
+*.autosave
+
+# Directorios de datos (grandes)
+data/
+datasets/
+*.mat
+!models/*.mat
+!config.mat
+
+# Resultados generados
+results/*.csv
+results/*.png
+results/*.jpg
+results/*.txt
+!results/.gitkeep
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*~
+
+# Temporales
+temp/
+tmp/
+*.log
