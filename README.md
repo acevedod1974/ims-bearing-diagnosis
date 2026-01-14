@@ -284,15 +284,14 @@ Este proyecto está bajo la licencia MIT. Ver [LICENSE](LICENSE) para más detal
 ## 👨‍💻 Autor
 
 **Daniel Acevedo Lopez**  
-Ingeniero Mecánico  
-Especialista en Procesos de Fabricación y Automatización
+UNEXPO - Departamento de Ingenieria Mecacnica 
 
 ---
 
 ## 🙏 Agradecimientos
 
 - **NASA**: Por el dataset IMS Bearing
-- **Universidad**: Por el apoyo en investigación
+- **UNEXPO**: Por el apoyo en investigación
 - **Comunidad MATLAB**: Por recursos y documentación
 
 ---
@@ -301,9 +300,9 @@ Especialista en Procesos de Fabricación y Automatización
 
 ¿Preguntas? ¿Sugerencias?
 
-- 📧 Email: tu-email@example.com
-- 🐙 GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- 📧 Email: dacevedo@unexpo.edu.ve
+- 🐙 GitHub: [@tu-usuario](https://github.com/acevedod1974)
+- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/acevedod1974)
 
 ---
 
@@ -321,6 +320,6 @@ Especialista en Procesos de Fabricación y Automatización
 
 **[⬆ Volver arriba](#-sistema-de-diagnóstico-predictivo-de-rodamientos-ims)**
 
-Desarrollado con ❤️ para la comunidad de Ingeniería Mecánica
+Desarrollado para la comunidad de Ingeniería Mecánica de la UNEXPO PZO
 
 </div>

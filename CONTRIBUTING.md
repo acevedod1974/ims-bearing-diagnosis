@@ -333,8 +333,8 @@ Los Pull Requests serán revisados considerando:
 ¿Dudas sobre cómo contribuir?
 
 - 💬 Abre un [Discussion](https://github.com/tu-usuario/ims-bearing-diagnosis/discussions)
-- 📧 Email: tu-email@example.com
-- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- 📧 Email: dacevedo@unexpo.edu.ve
+- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/acevedod1974)
 
 ---
 
