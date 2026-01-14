@@ -9,23 +9,27 @@
 Puedes contribuir de varias maneras:
 
 ### 🐛 Reportar Bugs
+
 - Usa el [Issue Tracker](https://github.com/tu-usuario/ims-bearing-diagnosis/issues)
 - Incluye pasos para reproducir
 - Especifica tu versión de MATLAB y OS
 - Adjunta logs o screenshots
 
 ### ✨ Sugerir Mejoras
+
 - Abre un Issue con label `enhancement`
 - Describe el caso de uso
 - Explica el beneficio esperado
 
 ### 📝 Mejorar Documentación
+
 - Corregir errores
 - Agregar ejemplos
 - Traducir a otros idiomas
 - Mejorar claridad
 
 ### 💻 Contribuir Código
+
 - Nuevas características (features)
 - Algoritmos de extracción de características
 - Mejoras de rendimiento
@@ -60,6 +64,7 @@ git checkout -b feature/mi-nueva-caracteristica
 ```
 
 **Nomenclatura de ramas:**
+
 - `feature/nombre` - Nueva funcionalidad
 - `bugfix/nombre` - Corrección de bug
 - `docs/nombre` - Cambios en documentación
@@ -70,6 +75,7 @@ git checkout -b feature/mi-nueva-caracteristica
 #### Estándares de Código
 
 **Estilo MATLAB:**
+
 ```matlab
 % BIEN: Funciones documentadas
 function features = extract_features(signal)
@@ -100,6 +106,7 @@ end
 ```
 
 **Convenciones:**
+
 - ✅ Nombres descriptivos: `extract_rms_kurtosis` no `func1`
 - ✅ Comentarios en español para código didáctico
 - ✅ Vectorización sobre bucles cuando sea posible
@@ -107,6 +114,7 @@ end
 - ✅ Documentación en header de función
 
 **Evitar:**
+
 - ❌ Variables de una letra (excepto `i`, `j` en loops cortos)
 - ❌ Código duplicado
 - ❌ Warnings sin resolver
@@ -148,6 +156,7 @@ git push origin feature/mi-nueva-caracteristica
 ```
 
 **Formato de mensajes de commit:**
+
 ```
 <tipo>: <descripción corta>
 
@@ -157,6 +166,7 @@ git push origin feature/mi-nueva-caracteristica
 ```
 
 **Tipos:**
+
 - `feat`: Nueva funcionalidad
 - `fix`: Corrección de bug
 - `docs`: Cambios en documentación
@@ -173,18 +183,22 @@ git push origin feature/mi-nueva-caracteristica
 
 ```markdown
 ## Descripción
+
 Breve descripción de los cambios.
 
 ## Tipo de cambio
+
 - [ ] Bug fix
 - [ ] Nueva funcionalidad
 - [ ] Breaking change
 - [ ] Documentación
 
 ## ¿Cómo se probó?
+
 Describe los tests realizados.
 
 ## Checklist
+
 - [ ] Mi código sigue el estilo del proyecto
 - [ ] He agregado comentarios (especialmente en partes complejas)
 - [ ] He actualizado la documentación
@@ -238,11 +252,13 @@ end
 ```
 
 **3. Actualizar documentación:**
+
 - Modificar API_REFERENCE.md
 - Actualizar README.md
 - Agregar ejemplo en demo
 
 **4. Reentrenar modelo:**
+
 ```matlab
 run('prepare_training_data.m')  % Con nuevas características
 run('train_new_model.m')
@@ -302,18 +318,21 @@ Los Pull Requests serán revisados considerando:
 ### Features Sugeridas
 
 **Prioridad Alta:**
+
 - [ ] Procesamiento paralelo con `parfor`
 - [ ] Interfaz gráfica (App Designer)
 - [ ] Exportación a otros formatos (Excel, JSON)
 - [ ] Tests unitarios automatizados
 
 **Prioridad Media:**
+
 - [ ] Análisis de envolvente espectral
 - [ ] Detección de frecuencias de falla (BPFO, BPFI)
 - [ ] Filtrado adaptativo de señales
 - [ ] Clustering de patrones de falla
 
 **Prioridad Baja:**
+
 - [ ] Integración con bases de datos SQL
 - [ ] API REST para diagnóstico en línea
 - [ ] Versión Python del extractor
@@ -334,7 +353,7 @@ Los Pull Requests serán revisados considerando:
 
 - 💬 Abre un [Discussion](https://github.com/tu-usuario/ims-bearing-diagnosis/discussions)
 - 📧 Email: dacevedo@unexpo.edu.ve
-- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/acevedod1974)
+- 💼 LinkedIn: [@acevedod1974](https://linkedin.com/in/acevedod1974)
 
 ---
 
@@ -343,12 +362,14 @@ Los Pull Requests serán revisados considerando:
 Este proyecto adhiere a valores de respeto y profesionalismo:
 
 ✅ **Esperamos:**
+
 - Comunicación respetuosa
 - Retroalimentación constructiva
 - Colaboración abierta
 - Mentalidad de aprendizaje
 
 ❌ **No toleramos:**
+
 - Lenguaje ofensivo
 - Ataques personales
 - Discriminación
