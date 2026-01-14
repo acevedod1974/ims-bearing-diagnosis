@@ -338,7 +338,7 @@ Si tienes problemas con la instalación:
 1. Revisa esta guía completa
 2. Verifica [FAQ](FAQ.md)
 3. Abre un issue en GitHub
-4. Contacta: tu-email@example.com
+4. Contacta: dacevedo@unexpo.edu.ve
 
 ---
 
