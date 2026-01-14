@@ -8,19 +8,21 @@ Esta guía te llevará paso a paso por la instalación del Sistema de Diagnósti
 
 ### Software Requerido
 
-| Componente | Versión Mínima | Recomendado | Notas |
-|------------|----------------|-------------|-------|
-| MATLAB | R2020a | R2023b+ | Versiones antiguas no soportadas |
-| Sistema Operativo | Windows 10 / macOS 10.14 / Linux | Windows 11 / macOS 14 | Cualquier OS compatible con MATLAB |
-| RAM | 8 GB | 16 GB | Para procesamiento de datasets grandes |
-| Espacio en Disco | 5 GB | 10 GB | Incluye dataset y resultados |
+| Componente        | Versión Mínima                   | Recomendado           | Notas                                  |
+| ----------------- | -------------------------------- | --------------------- | -------------------------------------- |
+| MATLAB            | R2020a                           | R2023b+               | Versiones antiguas no soportadas       |
+| Sistema Operativo | Windows 10 / macOS 10.14 / Linux | Windows 11 / macOS 14 | Cualquier OS compatible con MATLAB     |
+| RAM               | 8 GB                             | 16 GB                 | Para procesamiento de datasets grandes |
+| Espacio en Disco  | 5 GB                             | 10 GB                 | Incluye dataset y resultados           |
 
 ### MATLAB Toolboxes
 
 **Requeridos:**
+
 - ✅ Statistics and Machine Learning Toolbox
 
 **Opcionales (mejoran funcionalidad):**
+
 - Signal Processing Toolbox (para análisis espectral avanzado)
 - Parallel Computing Toolbox (para procesamiento paralelo)
 
@@ -198,6 +200,7 @@ run('examples/demo_01_single_file.m')
 ```
 
 **Resultado esperado:**
+
 - 3 gráficas de señales de vibración
 - Tabla de características extraídas
 - Diagnóstico con confianza >95%
@@ -210,11 +213,13 @@ run('examples/demo_01_single_file.m')
 ### Problema 1: "Toolbox not found"
 
 **Error:**
+
 ```
 Error: Statistics and Machine Learning Toolbox is required
 ```
 
 **Solución:**
+
 1. Abre MATLAB
 2. Ir a **Home** → **Add-Ons** → **Get Add-Ons**
 3. Buscar "Statistics and Machine Learning Toolbox"
@@ -223,11 +228,13 @@ Error: Statistics and Machine Learning Toolbox is required
 ### Problema 2: "Data folder not found"
 
 **Error:**
+
 ```
 ✗ data\1st_test (NO ENCONTRADA)
 ```
 
 **Solución:**
+
 1. Verifica que descargaste el dataset IMS
 2. Extrae los archivos en las carpetas correctas
 3. Ejecuta nuevamente `config_example.m`
@@ -235,11 +242,13 @@ Error: Statistics and Machine Learning Toolbox is required
 ### Problema 3: "Model file not found"
 
 **Error:**
+
 ```
 ✗ models\ims_modelo_especifico.mat (NO ENCONTRADO)
 ```
 
 **Solución:**
+
 1. Verifica que el archivo `ims_modelo_especifico.mat` existe en `models/`
 2. Si no existe, necesitas entrenarlo o descargarlo
 3. Ver: [docs/MODEL_TRAINING.md](MODEL_TRAINING.md)
@@ -247,11 +256,13 @@ Error: Statistics and Machine Learning Toolbox is required
 ### Problema 4: Función no encontrada
 
 **Error:**
+
 ```
 'IMS_bearing_diagnosis_main' is not found in the current folder
 ```
 
 **Solución:**
+
 ```matlab
 % Agregar carpetas al path
 addpath('src');
@@ -264,11 +275,13 @@ run('startup_ims.m')
 ### Problema 5: Warnings de Waitbar (Windows)
 
 **Warning:**
+
 ```
 Warning: Error updating Text. String scalar or character vector...
 ```
 
 **Solución:**
+
 - Estos warnings NO afectan el funcionamiento
 - El sistema continúa procesando correctamente
 - Para eliminarlos, descarga la versión corregida:
@@ -336,7 +349,7 @@ Instalación completa ✅ → Ahora puedes:
 Si tienes problemas con la instalación:
 
 1. Revisa esta guía completa
-2. Verifica [FAQ](FAQ.md)
+2. Consulta la sección [Preguntas Frecuentes](FAQ.md)
 3. Abre un issue en GitHub
 4. Contacta: dacevedo@unexpo.edu.ve
 

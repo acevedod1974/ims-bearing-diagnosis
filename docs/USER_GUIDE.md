@@ -39,6 +39,7 @@ Esto analiza UN archivo y muestra todo el proceso paso a paso.
 ### ¿Qué es el Demo?
 
 El demo analiza un archivo individual de vibración mostrando:
+
 - ✅ Señales triaxiales en el tiempo
 - ✅ Extracción de características (RMS, Curtosis)
 - ✅ Clasificación con Random Forest
@@ -53,6 +54,7 @@ run('examples/demo_01_single_file.m')
 ### Resultado del Demo
 
 **Consola:**
+
 ```
 ===============================================
   DEMO: Análisis de Señal Individual
@@ -79,6 +81,7 @@ PASO 5: Análisis espectral...
 ```
 
 **Gráficas:**
+
 - Figura 1: Señales de vibración (3 subplots)
 - Figura 2: Espectro de frecuencia
 
@@ -111,18 +114,19 @@ IMS_bearing_diagnosis_main()
 
 ### Tiempo de Procesamiento
 
-| Dataset | Archivos | Tiempo Estimado |
-|---------|----------|-----------------|
-| 1st_test | 2,156 | ~29 min |
-| 2nd_test | 984 | ~13 min |
-| 3rd_test | 6,324 | ~84 min |
-| **TOTAL** | **9,464** | **~2 horas** |
+| Dataset   | Archivos  | Tiempo Estimado |
+| --------- | --------- | --------------- |
+| 1st_test  | 2,156     | ~29 min         |
+| 2nd_test  | 984       | ~13 min         |
+| 3rd_test  | 6,324     | ~84 min         |
+| **TOTAL** | **9,464** | **~2 horas**    |
 
 ### Resultados Generados
 
 Al completarse, encontrarás en `results/`:
 
 **1. resultados_diagnostico.csv**
+
 ```csv
 Archivo,Prediccion,Confianza,RMS_X,RMS_Y,RMS_Z,Kurt_X,Kurt_Y,Kurt_Z
 2003.10.22.12.06.24,normal,99.0,0.1246,0.1175,0.1305,4.07,6.07,3.21
@@ -130,15 +134,18 @@ Archivo,Prediccion,Confianza,RMS_X,RMS_Y,RMS_Z,Kurt_X,Kurt_Y,Kurt_Z
 ```
 
 **2. resultados_diagnostico.mat**
+
 - Tabla MATLAB con todos los resultados
 - Cargable con: `load('results/resultados_diagnostico.mat')`
 
 **3. Gráficas PNG**
+
 - `histograma_confianza.png` - Distribución de confianzas
 - `caracteristicas_distribucion.png` - Features por clase (6 subplots)
 - `boxplots_caracteristicas.png` - Box plots de RMS y Curtosis
 
 **4. Reporte en Consola**
+
 ```
 ╔═══════════════════════════════════════════╗
 ║     REPORTE ESTADISTICO DEL SISTEMA      ║
@@ -210,6 +217,7 @@ IMS_bearing_diagnosis_main('config_test1.mat')
 ### Configuraciones Comunes
 
 **Solo 1st_test (rápido):**
+
 ```matlab
 config = load('config.mat');
 config.data_folders = {fullfile('data', '1st_test')};
@@ -218,6 +226,7 @@ IMS_bearing_diagnosis_main('config_1st.mat');
 ```
 
 **Carpeta personalizada:**
+
 ```matlab
 config = load('config.mat');
 config.data_folders = {'C:\MisDatos\Vibraciones'};
@@ -232,6 +241,7 @@ IMS_bearing_diagnosis_main('config_custom.mat');
 ### Entender la Confianza
 
 **Confianza del clasificador:**
+
 - **>95%**: Diagnóstico muy confiable
 - **85-95%**: Confianza moderada, revisar
 - **<85%**: Baja confianza, análisis manual requerido
@@ -239,11 +249,13 @@ IMS_bearing_diagnosis_main('config_custom.mat');
 ### Características Físicas
 
 **RMS (Root Mean Square):**
+
 - Representa la **energía** de vibración
 - RMS alto → Mayor nivel de vibración (desgaste, desbalanceo)
 - Unidades: g (aceleración de gravedad)
 
 **Curtosis (Kurtosis):**
+
 - Mide **impulsividad** de la señal
 - Curtosis ≈ 3 → Distribución normal (rodamiento sano)
 - Curtosis > 5 → Impactos repetitivos (grietas, fallas)
@@ -260,6 +272,7 @@ Kurt_Z: 12.4 (muy alto)
 ```
 
 **Interpretación:**
+
 - ✅ Alta confianza (96.5%) → Diagnóstico confiable
 - ⚠️ RMS alto en eje Z → Vibración elevada axial
 - 🔴 Curtosis muy alta (12.4) → Impactos severos
@@ -431,8 +444,8 @@ help extract_rms_kurtosis
 ### Documentación Adicional
 
 - [Referencia de API](API_REFERENCE.md) - Documentación de funciones
-- [Entrenar Modelo](MODEL_TRAINING.md) - Guía de reentrenamiento
-- [FAQ](FAQ.md) - Preguntas frecuentes
+- [Entrenamiento de Modelo](MODEL_TRAINING.md) - Guía de reentrenamiento
+- [Preguntas Frecuentes](FAQ.md) - Solución de problemas y dudas comunes
 
 ---
 

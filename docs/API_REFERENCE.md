@@ -7,20 +7,24 @@ Documentación técnica completa de todas las funciones del sistema.
 ## 📋 Índice de Funciones
 
 ### Funciones Principales
+
 - [IMS_bearing_diagnosis_main](#ims_bearing_diagnosis_main)
 - [extract_rms_kurtosis](#extract_rms_kurtosis)
 
 ### Funciones de Utilidad
+
 - [config_example](#config_example)
 - [check_installation](#check_installation)
 - [startup_ims](#startup_ims)
 
 ### Funciones de Entrenamiento
+
 - [prepare_training_data](#prepare_training_data)
 - [train_new_model](#train_new_model)
 - [compare_models](#compare_models)
 
 ### Funciones de Demostración
+
 - [demo_01_single_file](#demo_01_single_file)
 
 ---
@@ -32,6 +36,7 @@ Documentación técnica completa de todas las funciones del sistema.
 Sistema principal de diagnóstico de rodamientos.
 
 **Sintaxis:**
+
 ```matlab
 IMS_bearing_diagnosis_main()
 IMS_bearing_diagnosis_main(config_file)
@@ -42,17 +47,19 @@ Procesa archivos de vibración del dataset IMS, extrae características estadís
 
 **Parámetros:**
 
-| Nombre | Tipo | Requerido | Descripción |
-|--------|------|-----------|-------------|
-| `config_file` | string | No | Ruta al archivo de configuración (default: 'config.mat') |
+| Nombre        | Tipo   | Requerido | Descripción                                              |
+| ------------- | ------ | --------- | -------------------------------------------------------- |
+| `config_file` | string | No        | Ruta al archivo de configuración (default: 'config.mat') |
 
 **Salidas:**
+
 - Archivo CSV: `results/resultados_diagnostico.csv`
 - Archivo MAT: `results/resultados_diagnostico.mat`
 - Gráficas PNG: 3 archivos en `results/`
 - Reporte estadístico en consola
 
 **Ejemplo:**
+
 ```matlab
 % Usar configuración por defecto
 IMS_bearing_diagnosis_main()
@@ -62,6 +69,7 @@ IMS_bearing_diagnosis_main('config_custom.mat')
 ```
 
 **Notas:**
+
 - Tiempo de ejecución: ~2 horas para dataset completo (9,464 archivos)
 - Actualiza barra de progreso cada 50 archivos
 - Continúa procesamiento si archivos individuales fallan
@@ -75,6 +83,7 @@ IMS_bearing_diagnosis_main('config_custom.mat')
 Extrae características estadísticas de señales de vibración triaxiales.
 
 **Sintaxis:**
+
 ```matlab
 features = extract_rms_kurtosis(signal_xyz)
 ```
@@ -84,11 +93,12 @@ Calcula el RMS (Root Mean Square) y la Curtosis para cada canal de una señal tr
 
 **Parámetros:**
 
-| Nombre | Tipo | Dimensiones | Descripción |
-|--------|------|-------------|-------------|
-| `signal_xyz` | double | [N×3] | Matriz con señales X, Y, Z en columnas |
+| Nombre       | Tipo   | Dimensiones | Descripción                            |
+| ------------ | ------ | ----------- | -------------------------------------- |
+| `signal_xyz` | double | [N×3]       | Matriz con señales X, Y, Z en columnas |
 
 Donde:
+
 - N: Número de muestras (típicamente 20,480)
 - Columna 1: Señal eje X (horizontal)
 - Columna 2: Señal eje Y (vertical)
@@ -96,11 +106,12 @@ Donde:
 
 **Salidas:**
 
-| Nombre | Tipo | Dimensiones | Descripción |
-|--------|------|-------------|-------------|
-| `features` | double | [1×6] | Vector de características |
+| Nombre     | Tipo   | Dimensiones | Descripción               |
+| ---------- | ------ | ----------- | ------------------------- |
+| `features` | double | [1×6]       | Vector de características |
 
 Elementos del vector:
+
 - `features(1)`: RMS canal X
 - `features(2)`: RMS canal Y
 - `features(3)`: RMS canal Z
@@ -109,6 +120,7 @@ Elementos del vector:
 - `features(6)`: Curtosis canal Z
 
 **Ejemplo:**
+
 ```matlab
 % Cargar datos
 data = readmatrix('data/1st_test/2003.10.22.12.06.24', 'FileType', 'text');
@@ -123,6 +135,7 @@ fprintf('Kurt: X=%.4f, Y=%.4f, Z=%.4f\n', features(4:6));
 ```
 
 **Validaciones:**
+
 - Verifica que entrada sea matriz [N×3]
 - N debe ser ≥10 muestras
 - No admite valores NaN o Inf
@@ -132,7 +145,7 @@ fprintf('Kurt: X=%.4f, Y=%.4f, Z=%.4f\n', features(4:6));
 ```matlab
 % Error si dimensiones incorrectas
 signal_bad = rand(100, 2);  % Solo 2 columnas
-features = extract_rms_kurtosis(signal_bad);  
+features = extract_rms_kurtosis(signal_bad);
 % → Error: signal_xyz debe tener exactamente 3 columnas
 
 % Error si muy pocas muestras
@@ -142,6 +155,7 @@ features = extract_rms_kurtosis(signal_bad);
 ```
 
 **Rendimiento:**
+
 - Tiempo típico: <1 ms para 20,480 muestras
 - Implementación vectorizada (sin bucles)
 - Compatible con MATLAB R2020a+
@@ -149,11 +163,13 @@ features = extract_rms_kurtosis(signal_bad);
 **Interpretación Física:**
 
 **RMS (Root Mean Square):**
+
 - Representa energía de vibración
 - Valores típicos rodamiento sano: 0.05-0.15 g
 - Valores altos (>0.3 g): desgaste, desbalanceo
 
 **Curtosis:**
+
 - Mide impulsividad de señal
 - Distribución normal: Kurt ≈ 3
 - Kurt > 5: presencia de impactos (fallas)
@@ -170,6 +186,7 @@ features = extract_rms_kurtosis(signal_bad);
 Genera archivo de configuración con rutas del proyecto.
 
 **Sintaxis:**
+
 ```matlab
 run('src/utils/config_example.m')
 ```
@@ -178,9 +195,11 @@ run('src/utils/config_example.m')
 Crea `config.mat` en la raíz del proyecto con todas las rutas necesarias. Detecta automáticamente la ubicación del proyecto.
 
 **Genera:**
+
 - `config.mat` - Archivo de configuración
 
 **Estructura de config.mat:**
+
 ```matlab
 config.data_folders = {...}     % Cell array con rutas a datos
 config.model_file = '...'       % String con ruta al modelo
@@ -190,6 +209,7 @@ config.save_figures = true      % Boolean para guardar gráficas
 ```
 
 **Ejemplo de personalización:**
+
 ```matlab
 % Editar src/utils/config_example.m líneas 22-26
 config.data_folders = {
@@ -208,12 +228,14 @@ run('src/utils/config_example.m')
 Verifica que todos los componentes estén instalados correctamente.
 
 **Sintaxis:**
+
 ```matlab
 run('check_installation.m')
 ```
 
 **Descripción:**
 Realiza 8 verificaciones del sistema:
+
 1. Versión de MATLAB (≥R2020a)
 2. Toolboxes requeridos
 3. Estructura de carpetas
@@ -227,6 +249,7 @@ Realiza 8 verificaciones del sistema:
 Reporte con porcentaje de éxito y estado del sistema.
 
 **Ejemplo de salida:**
+
 ```
 Total de verificaciones: 20
 Pasadas:                 20 ✓
@@ -242,6 +265,7 @@ Fallidas:                0 ✗
 Configura el entorno de MATLAB para el proyecto.
 
 **Sintaxis:**
+
 ```matlab
 run('startup_ims.m')
 ```
@@ -250,6 +274,7 @@ run('startup_ims.m')
 Agrega carpetas necesarias al path de MATLAB y muestra comandos disponibles.
 
 **Acciones:**
+
 - Detecta raíz del proyecto
 - Agrega `src/`, `src/utils/`, `examples/` al path
 - Verifica funciones principales
@@ -257,8 +282,10 @@ Agrega carpetas necesarias al path de MATLAB y muestra comandos disponibles.
 
 **Ejecutar automáticamente:**
 Para que se ejecute cada vez que abres MATLAB:
+
 1. Crea `startup.m` en carpeta de usuario MATLAB
 2. Agrega línea:
+
 ```matlab
 run('ruta/completa/a/startup_ims.m')
 ```
@@ -272,14 +299,17 @@ run('ruta/completa/a/startup_ims.m')
 Prepara dataset etiquetado para entrenamiento.
 
 **Sintaxis:**
+
 ```matlab
 run('prepare_training_data.m')
 ```
 
 **Requisitos previos:**
+
 - Archivo `labeled_data.csv` en raíz del proyecto
 
 **Formato de labeled_data.csv:**
+
 ```csv
 archivo,etiqueta
 2003.10.22.12.06.24,normal
@@ -287,11 +317,13 @@ archivo,etiqueta
 ```
 
 **Genera:**
+
 - `training_dataset.mat` - Dataset listo
 - `training_dataset.csv` - Versión legible
 - `training_data_visualization.png` - Gráficas
 
 **Salida (training_dataset.mat):**
+
 ```matlab
 features    % Matriz [N×6] con características
 labels      % Vector [N×1] con etiquetas
@@ -305,14 +337,17 @@ training_data  % Tabla con features + labels
 Entrena un nuevo modelo Random Forest.
 
 **Sintaxis:**
+
 ```matlab
 run('train_new_model.m')
 ```
 
 **Requisitos previos:**
+
 - Ejecutar `prepare_training_data.m` primero
 
 **Hiperparámetros configurables (líneas 48-51):**
+
 ```matlab
 n_trees = 100;              % Número de árboles
 min_leaf_size = 5;          % Mínimo muestras por hoja
@@ -321,6 +356,7 @@ num_variables_to_sample = 'all';  % Variables por división
 ```
 
 **Genera:**
+
 - `models/ims_modelo_nuevo.mat` - Modelo entrenado
 - `models/ims_modelo_especifico_BACKUP.mat` - Backup
 - `confusion_matrix.png`
@@ -328,6 +364,7 @@ num_variables_to_sample = 'all';  % Variables por división
 - `oob_error_evolution.png`
 
 **Métricas reportadas:**
+
 - Accuracy total
 - Error OOB
 - Precision/Recall/F1 por clase
@@ -340,20 +377,24 @@ num_variables_to_sample = 'all';  % Variables por división
 Compara modelo original vs nuevo.
 
 **Sintaxis:**
+
 ```matlab
 run('compare_models.m')
 ```
 
 **Requisitos previos:**
+
 - Modelo original: `models/ims_modelo_especifico.mat`
 - Modelo nuevo: `models/ims_modelo_nuevo.mat`
 
 **Genera:**
+
 - `model_comparison.png` - Matrices de confusión lado a lado
 - Reporte comparativo en consola
 - Recomendación automática
 
 **Salida ejemplo:**
+
 ```
 ╔═══════════════════════════════════════════╗
 ║           COMPARACIÓN DE MÉTRICAS         ║
@@ -378,12 +419,14 @@ run('compare_models.m')
 Analiza un archivo individual con visualizaciones paso a paso.
 
 **Sintaxis:**
+
 ```matlab
 run('examples/demo_01_single_file.m')
 ```
 
 **Descripción:**
 Script educativo que muestra TODO el proceso de diagnóstico:
+
 1. Carga de datos
 2. Visualización de señales
 3. Extracción de características
@@ -391,6 +434,7 @@ Script educativo que muestra TODO el proceso de diagnóstico:
 5. Análisis espectral (BONUS)
 
 **Archivo analizado (por defecto):**
+
 ```matlab
 data_file = fullfile('..', 'data', '1st_test', '2003.10.22.12.06.24');
 ```
@@ -399,6 +443,7 @@ data_file = fullfile('..', 'data', '1st_test', '2003.10.22.12.06.24');
 Edita línea 25 del script.
 
 **Genera:**
+
 - Figura 1: Señales triaxiales (3 subplots)
 - Figura 2: Espectro de frecuencia
 - Reporte completo en consola
@@ -412,13 +457,13 @@ Ideal para clases de Procesos de Fabricación, muestra físicamente cada etapa d
 
 ### Tipos de Datos
 
-| Tipo | Descripción | Ejemplo |
-|------|-------------|---------|
-| `double` | Números de punto flotante | `0.1246` |
-| `string` | Cadena de texto | `"normal"` |
-| `categorical` | Categoría | `categorical("outer_race_fault")` |
-| `table` | Tabla de datos | `results = table(...)` |
-| `struct` | Estructura | `config.data_folders` |
+| Tipo          | Descripción               | Ejemplo                           |
+| ------------- | ------------------------- | --------------------------------- |
+| `double`      | Números de punto flotante | `0.1246`                          |
+| `string`      | Cadena de texto           | `"normal"`                        |
+| `categorical` | Categoría                 | `categorical("outer_race_fault")` |
+| `table`       | Tabla de datos            | `results = table(...)`            |
+| `struct`      | Estructura                | `config.data_folders`             |
 
 ### Nomenclatura
 
@@ -428,12 +473,14 @@ Ideal para clases de Procesos de Fabricación, muestra físicamente cada etapa d
 
 ---
 
-## 📞 Soporte
+## 🗂️ Soporte
 
-Para más información:
+Para más información y ayuda:
+
 - [Manual de Usuario](USER_GUIDE.md)
 - [Guía de Instalación](INSTALLATION.md)
-- [Entrenar Modelo](MODEL_TRAINING.md)
+- [Entrenamiento de Modelo](MODEL_TRAINING.md)
+- [Preguntas Frecuentes](FAQ.md)
 
 ---
 

@@ -262,8 +262,9 @@ movefile('models/ims_modelo_nuevo.mat', ...
 - **[Guía de Instalación](docs/INSTALLATION.md)**: Instalación paso a paso
 - **[Manual de Usuario](docs/USER_GUIDE.md)**: Guía completa de uso
 - **[Referencia de API](docs/API_REFERENCE.md)**: Documentación de funciones
-- **[Entrenar Modelo](docs/MODEL_TRAINING.md)**: Guía de reentrenamiento
-- **[Mejoras Implementadas](docs/MEJORAS_IMPLEMENTADAS.md)**: Historial de cambios
+- **[Entrenamiento de Modelo](docs/MODEL_TRAINING.md)**: Cómo reentrenar y personalizar el modelo
+- **[Preguntas Frecuentes](docs/FAQ.md)**: Solución de problemas y dudas comunes
+- **[Mejoras Implementadas](docs/MEJORAS_IMPLEMENTADAS.md)**: Historial de cambios y roadmap
 
 ---
 
