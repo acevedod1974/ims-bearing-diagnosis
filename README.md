@@ -1,4 +1,4 @@
-# 🔧 Sistema de Diagnóstico Predictivo de Rodamientos IMS
+# Sistema de Diagnóstico Predictivo de Rodamientos IMS
 
 <div align="center">
 
