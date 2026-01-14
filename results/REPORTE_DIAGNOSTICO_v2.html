@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Diagnóstico IMS</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; border-left: 4px solid #3498db; padding-left: 15px; }
+        .metric { display: inline-block; margin: 10px; padding: 20px; background: #ecf0f1; border-radius: 5px; min-width: 200px; }
+        .metric-value { font-size: 36px; font-weight: bold; color: #2980b9; }
+        .metric-label { font-size: 14px; color: #7f8c8d; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th { background: #3498db; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; }
+        tr:hover { background: #f8f9fa; }
+        .alert-critical { background: #e74c3c; color: white; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .alert-warning { background: #f39c12; color: white; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .alert-success { background: #27ae60; color: white; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #95a5a6; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📊 Reporte de Diagnóstico Predictivo - Dataset IMS</h1>
+    <p><strong>Fecha:</strong> 14/01/2026 19:32 | <strong>Versión:</strong> v1.2.1</p>
+    <h2>1. Resumen Ejecutivo</h2>
+    <div class="metric">
+        <div class="metric-label">Archivos Analizados</div>
+        <div class="metric-value">9464</div>
+    </div>
+    <div class="metric">
+        <div class="metric-label">Fallas Detectadas</div>
+        <div class="metric-value">7.5%</div>
+    </div>
+    <div class="metric">
+        <div class="metric-label">Confianza Promedio</div>
+        <div class="metric-value">95.8%</div>
+    </div>
+    <div class="alert-success">✓ <strong>OPERACIÓN NORMAL:</strong> Sistema en condiciones aceptables.</div>
+    <h2>2. Análisis por Dataset</h2>
+    <table>
+        <tr><th>Dataset</th><th>Archivos</th><th>Fallas</th><th>% Fallas</th><th>RMS Z</th><th>Kurt Z</th></tr>
+    </table>
+    <div class="footer">
+        <p>Generado automáticamente por Sistema de Diagnóstico IMS v1.2.1</p>
+        <p>Modelo: Random Forest | Accuracy: 94-98%</p>
+    </div>
+</div>
+</body>
+</html>
