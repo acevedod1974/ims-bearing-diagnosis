@@ -115,8 +115,10 @@ function results = process_bearing_data(folders, model)
 
         fprintf('Procesando: %s (%d archivos)\n', folder, numel(files));
 
-        % Barra de progreso
-        h = waitbar(0, sprintf('Procesando %s...', folder));
+        % Barra de progreso - VERSIÓN COMPATIBLE R2020a
+        % Extraer solo el nombre de la carpeta (sin ruta completa)
+        [~, folder_name] = fileparts(folder);
+        h = waitbar(0, sprintf('Procesando carpeta %d/%d...', f, length(folders)));
         tic; % Iniciar cronómetro
 
         for i = 1:numel(files)
@@ -155,18 +157,30 @@ function results = process_bearing_data(folders, model)
                 warning('Error procesando %s: %s', files(i).name, ME.message);
             end
 
-            % Actualizar waitbar con tiempo estimado
-            elapsed = toc;
-            est_total = elapsed / i * numel(files);
-            remaining = est_total - elapsed;
-            waitbar(i/numel(files), h, ...
-                    sprintf('Procesando %s... (%.0f seg restantes)', folder, remaining));
+            % Actualizar waitbar cada 50 archivos para evitar overhead
+            if mod(i, 50) == 0 || i == numel(files)
+                elapsed = toc;
+                est_total = elapsed / i * numel(files);
+                remaining = est_total - elapsed;
+
+                % Mensaje simple sin caracteres especiales
+                progress_pct = 100 * i / numel(files);
+                msg = sprintf('Carpeta %d/%d: %.1f%% completado (%.0f min restantes)', ...
+                              f, length(folders), progress_pct, remaining/60);
+
+                try
+                    waitbar(i/numel(files), h, msg);
+                catch
+                    % Si falla el waitbar, continuar sin él
+                end
+            end
         end
 
         close(h);
+        fprintf('  ✓ Completado: %d archivos procesados\n', numel(files));
     end
 
-    fprintf('✓ Procesados %d/%d archivos exitosamente\n', processed_files, total_files);
+    fprintf('\n✓ Procesados %d/%d archivos exitosamente\n', processed_files, total_files);
 
     if processed_files == 0
         warning('No se procesó ningún archivo. Verifique las rutas de datos.');
@@ -195,6 +209,8 @@ end
 %  ========================================================================
 function generate_visualizations(results, output_dir)
 
+    fprintf('\nGenerando visualizaciones...\n');
+
     % =====================================================================
     % GRÁFICA 1: Histograma de Confianza con Referencias
     % =====================================================================
@@ -204,14 +220,14 @@ function generate_visualizations(results, output_dir)
     hold on;
 
     % Líneas de referencia
-    xline(85, 'r--', 'LineWidth', 2, 'Label', 'Umbral óptimo (85%)');
+    xline(85, 'r--', 'LineWidth', 2, 'Label', 'Umbral optimo (85%)');
     xline(mean(results.Confianza), 'g--', 'LineWidth', 1.5, ...
           'Label', sprintf('Media: %.1f%%', mean(results.Confianza)));
 
-    title('Distribución de Confianza del Clasificador', 'FontSize', 14, 'FontWeight', 'bold');
-    xlabel('Confianza de Predicción (%)', 'FontSize', 12);
+    title('Distribucion de Confianza del Clasificador', 'FontSize', 14, 'FontWeight', 'bold');
+    xlabel('Confianza de Prediccion (%)', 'FontSize', 12);
     ylabel('Frecuencia Relativa', 'FontSize', 12);
-    legend('Datos', 'Umbral óptimo', 'Media', 'Location', 'northwest');
+    legend('Datos', 'Umbral optimo', 'Media', 'Location', 'northwest');
     grid on;
 
     saveas(gcf, fullfile(output_dir, 'histograma_confianza.png'));
@@ -258,7 +274,7 @@ function generate_visualizations(results, output_dir)
     xlabel('Kurt_Y'); ylabel('Kurt_Z'); 
     grid on; legend('Location', 'best');
 
-    sgtitle('Distribución de Características por Clase de Falla', ...
+    sgtitle('Distribucion de Caracteristicas por Clase de Falla', ...
             'FontSize', 16, 'FontWeight', 'bold');
 
     saveas(gcf, fullfile(output_dir, 'caracteristicas_distribucion.png'));
@@ -272,14 +288,14 @@ function generate_visualizations(results, output_dir)
     subplot(1,2,1);
     boxplot([results.RMS_X, results.RMS_Y, results.RMS_Z], ...
             'Labels', {'RMS_X', 'RMS_Y', 'RMS_Z'});
-    title('Distribución de RMS por Eje', 'FontWeight', 'bold');
+    title('Distribucion de RMS por Eje', 'FontWeight', 'bold');
     ylabel('Valor RMS');
     grid on;
 
     subplot(1,2,2);
     boxplot([results.Kurt_X, results.Kurt_Y, results.Kurt_Z], ...
             'Labels', {'Kurt_X', 'Kurt_Y', 'Kurt_Z'});
-    title('Distribución de Curtosis por Eje', 'FontWeight', 'bold');
+    title('Distribucion de Curtosis por Eje', 'FontWeight', 'bold');
     ylabel('Valor de Curtosis');
     yline(3, 'r--', 'LineWidth', 1.5, 'Label', 'Kurt = 3 (Normal)');
     grid on;
@@ -287,18 +303,18 @@ function generate_visualizations(results, output_dir)
     saveas(gcf, fullfile(output_dir, 'boxplots_caracteristicas.png'));
     close;
 
-    fprintf('✓ Visualizaciones generadas:\n');
-    fprintf('  - histograma_confianza.png\n');
-    fprintf('  - caracteristicas_distribucion.png\n');
-    fprintf('  - boxplots_caracteristicas.png\n');
+    fprintf('  ✓ histograma_confianza.png\n');
+    fprintf('  ✓ caracteristicas_distribucion.png\n');
+    fprintf('  ✓ boxplots_caracteristicas.png\n');
 end
 
 %% ========================================================================
 %  FUNCIÓN: Reporte Estadístico Enriquecido
 %  ========================================================================
 function generate_statistical_report(results)
-    fprintf('\n╔═══════════════════════════════════════════╗\n');
-    fprintf('║     REPORTE ESTADÍSTICO DEL SISTEMA      ║\n');
+    fprintf('\n');
+    fprintf('╔═══════════════════════════════════════════╗\n');
+    fprintf('║     REPORTE ESTADISTICO DEL SISTEMA      ║\n');
     fprintf('╚═══════════════════════════════════════════╝\n\n');
 
     % =====================================================================
@@ -315,7 +331,7 @@ function generate_statistical_report(results)
     % DISTRIBUCIÓN POR CLASE
     % =====================================================================
     categories = unique(results.Prediccion);
-    fprintf('🔍 DISTRIBUCIÓN DE DIAGNÓSTICOS:\n');
+    fprintf('🔍 DISTRIBUCION DE DIAGNOSTICOS:\n');
     for i = 1:numel(categories)
         count = sum(strcmp(results.Prediccion, categories{i}));
         pct = 100*count/height(results);
@@ -341,7 +357,7 @@ function generate_statistical_report(results)
                       ~strcmp(results.Prediccion, 'Normal'));
 
     if high_risk > 0
-        fprintf('   🔴 CRÍTICO: %d archivos con fallas de ALTA CONFIANZA (>90%%%%)\n', high_risk);
+        fprintf('   🔴 CRITICO: %d archivos con fallas de ALTA CONFIANZA (>90%%%%)\n', high_risk);
     end
 
     if medium_risk > 0
@@ -349,13 +365,13 @@ function generate_statistical_report(results)
     end
 
     if high_risk == 0 && medium_risk == 0
-        fprintf('   🟢 Sin alertas críticas detectadas\n');
+        fprintf('   🟢 Sin alertas criticas detectadas\n');
     end
 
     % =====================================================================
     % ESTADÍSTICOS DE CARACTERÍSTICAS
     % =====================================================================
-    fprintf('\n📈 ESTADÍSTICOS DE CARACTERÍSTICAS:\n');
+    fprintf('\n📈 ESTADISTICOS DE CARACTERISTICAS:\n');
     fprintf('   RMS Promedio:   X=%.4f, Y=%.4f, Z=%.4f\n', ...
             mean(results.RMS_X), mean(results.RMS_Y), mean(results.RMS_Z));
     fprintf('   Kurt Promedio:  X=%.4f, Y=%.4f, Z=%.4f\n', ...
