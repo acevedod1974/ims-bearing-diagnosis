@@ -1,16 +1,15 @@
 % config_example.m
 % Archivo de configuración de ejemplo para el sistema IMS
-% 
+%
 % INSTRUCCIONES:
-%   1. Edita las rutas según tu sistema
-%   2. Ejecuta este script para generar config.mat
-%   3. El script principal usará config.mat automáticamente
+% 1. Edita las rutas según tu sistema
+% 2. Ejecuta este script para generar config.mat
+% 3. El script principal usará config.mat automáticamente
 %
 % Autor: Daniel Acevedo Lopez
 % Fecha: Enero 2026
 
 clear; clc;
-
 fprintf('=== Generando archivo de configuración ===\n\n');
 
 % =========================================================================
@@ -63,8 +62,8 @@ config.figure_dpi = 300;
 % GUARDAR CONFIGURACIÓN
 % =========================================================================
 save('config.mat', '-struct', 'config');
-
 fprintf('✓ Configuración guardada en config.mat\n');
+
 fprintf('\nCarpetas configuradas:\n');
 for i = 1:length(config.data_folders)
     if isfolder(config.data_folders{i})
