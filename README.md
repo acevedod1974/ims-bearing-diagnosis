@@ -25,6 +25,7 @@ Sistema de diagnóstico automático para detección temprana de fallas en rodami
 ### 🎯 Objetivo
 
 Predecir y clasificar el estado de salud de rodamientos industriales mediante análisis de vibraciones, permitiendo:
+
 - ✅ Detección temprana de fallas
 - ✅ Reducción de paradas no programadas
 - ✅ Optimización de costos de mantenimiento
@@ -35,18 +36,21 @@ Predecir y clasificar el estado de salud de rodamientos industriales mediante an
 ## ⚡ Características Principales
 
 ### 🔬 Análisis Técnico
+
 - **Extracción de características estadísticas**: RMS y Curtosis triaxiales
 - **Clasificación inteligente**: Random Forest con validación cruzada
 - **Procesamiento batch**: Análisis de miles de archivos automáticamente
 - **Código vectorizado**: Optimizado para máximo rendimiento
 
 ### 📊 Visualizaciones
+
 - Distribución de confianza de predicciones
 - Gráficas de características en espacio 2D/3D
 - Box plots por canal y característica
 - Análisis espectral (FFT) de señales
 
 ### 🎓 Valor Pedagógico
+
 - Scripts de demostración interactivos
 - Documentación técnica completa en español
 - Ejemplos paso a paso para enseñanza
@@ -122,7 +126,8 @@ Procesa todo el dataset IMS (9,464 archivos):
 IMS_bearing_diagnosis_main()
 ```
 
-**Resultado:** 
+**Resultado:**
+
 - CSV con diagnósticos: `results/resultados_diagnostico.csv`
 - 3 gráficas PNG de análisis
 - Reporte estadístico completo
@@ -145,12 +150,12 @@ IMS_bearing_diagnosis_main('config_custom.mat')
 
 ### Métricas de Rendimiento
 
-| Métrica | Valor |
-|---------|-------|
-| Accuracy | 94-98% |
-| Precision (normal) | 97-99% |
-| Recall (outer_race_fault) | 92-96% |
-| Tiempo por archivo | ~0.8 seg |
+| Métrica                   | Valor    |
+| ------------------------- | -------- |
+| Accuracy                  | 94-98%   |
+| Precision (normal)        | 97-99%   |
+| Recall (outer_race_fault) | 92-96%   |
+| Tiempo por archivo        | ~0.8 seg |
 
 ### Características Extraídas
 
@@ -158,6 +163,7 @@ IMS_bearing_diagnosis_main('config_custom.mat')
 - **Curtosis (Kurtosis)**: Detección de impulsividad (fallas localizadas)
 
 **Interpretación física:**
+
 - RMS elevado → Desgaste general, desbalanceo
 - Curtosis > 5 → Impactos repetitivos (grietas, fallas localizadas)
 
@@ -284,7 +290,7 @@ Este proyecto está bajo la licencia MIT. Ver [LICENSE](LICENSE) para más detal
 ## 👨‍💻 Autor
 
 **Daniel Acevedo Lopez**  
-UNEXPO - Departamento de Ingenieria Mecacnica 
+UNEXPO - Departamento de Ingenieria Mecacnica
 
 ---
 
@@ -301,8 +307,8 @@ UNEXPO - Departamento de Ingenieria Mecacnica
 ¿Preguntas? ¿Sugerencias?
 
 - 📧 Email: dacevedo@unexpo.edu.ve
-- 🐙 GitHub: [@tu-usuario](https://github.com/acevedod1974)
-- 💼 LinkedIn: [Tu Perfil](https://linkedin.com/in/acevedod1974)
+- 🐙 GitHub: [@acevedod1974](https://github.com/acevedod1974)
+- 💼 LinkedIn: [@acevedod1974](https://linkedin.com/in/acevedod1974)
 
 ---
 
