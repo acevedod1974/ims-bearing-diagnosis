@@ -323,10 +323,6 @@ UNEXPO - Departamento de Ingenieria Mecacnica
 
 ---
 
-<div align="center">
-
 **[⬆ Volver arriba](#-sistema-de-diagnóstico-predictivo-de-rodamientos-ims)**
 
 Desarrollado para la comunidad de Ingeniería Mecánica de la UNEXPO PZO
-
-</div>
