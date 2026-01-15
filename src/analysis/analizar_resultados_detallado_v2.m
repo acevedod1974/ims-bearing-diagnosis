@@ -1,6 +1,6 @@
 %% analizar_resultados_detallado_v2.m
 % ═══════════════════════════════════════════════════════════════════════
-% ANÁLISIS PROFUNDO DE RESULTADOS IMS - VERSIÓN MEJORADA v2.0
+% ANÁLISIS PROFUNDO DE RESULTADOS IMS - VERSIÓN MEJORADA v2.1
 % ═══════════════════════════════════════════════════════════════════════
 %
 % Mejoras sobre v1.0:
@@ -29,7 +29,7 @@ output_dir = fullfile(project_root, 'results');
 
 fprintf('\n');
 fprintf('╔═══════════════════════════════════════════════════════════╗\n');
-fprintf('║  ANÁLISIS DETALLADO DE RESULTADOS IMS - v2.0            ║\n');
+fprintf('║  ANÁLISIS DETALLADO DE RESULTADOS IMS - v2.1            ║\n');
 fprintf('╚═══════════════════════════════════════════════════════════╝\n');
 fprintf('\n');
 
@@ -157,20 +157,6 @@ fprintf('╔══════════════════════�
 fprintf('║  ESTADÍSTICAS DESCRIPTIVAS AVANZADAS                     ║\n');
 fprintf('╚═══════════════════════════════════════════════════════════╝\n');
 fprintf('\n');
-
-% Función auxiliar para estadísticas completas
-function print_stats(data, label)
-    fprintf('%s:\n', label);
-    fprintf('  Media:        %10.6f\n', mean(data));
-    fprintf('  Mediana:      %10.6f\n', median(data));
-    fprintf('  Desv. Std:    %10.6f\n', std(data));
-    fprintf('  Mín-Máx:      %10.6f - %.6f\n', min(data), max(data));
-    fprintf('  Percentiles:  [P25: %.6f | P50: %.6f | P75: %.6f]\n', ...
-            prctile(data, 25), prctile(data, 50), prctile(data, 75));
-    fprintf('  IQR:          %10.6f\n', iqr(data));
-    fprintf('  CV:           %10.2f%%\n', 100*std(data)/mean(data));
-    fprintf('\n');
-end
 
 % RMS por eje
 fprintf('═══ RMS (Root Mean Square) ═══\n\n');
@@ -446,3 +432,18 @@ fprintf('═══════════════════════�
 fprintf('  Para visualizar gráficas: open results/analisis_temporal_v2.png\n');
 fprintf('═══════════════════════════════════════════════════════════\n');
 fprintf('\n');
+
+%% FUNCIONES LOCALES (DEBEN IR AL FINAL)
+% Función auxiliar para estadísticas completas
+function print_stats(data, label)
+    fprintf('%s:\n', label);
+    fprintf('  Media:        %10.6f\n', mean(data));
+    fprintf('  Mediana:      %10.6f\n', median(data));
+    fprintf('  Desv. Std:    %10.6f\n', std(data));
+    fprintf('  Mín-Máx:      %10.6f - %.6f\n', min(data), max(data));
+    fprintf('  Percentiles:  [P25: %.6f | P50: %.6f | P75: %.6f]\n', ...
+            prctile(data, 25), prctile(data, 50), prctile(data, 75));
+    fprintf('  IQR:          %10.6f\n', iqr(data));
+    fprintf('  CV:           %10.2f%%\n', 100*std(data)/mean(data));
+    fprintf('\n');
+end
