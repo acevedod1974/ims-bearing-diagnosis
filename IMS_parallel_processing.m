@@ -1,11 +1,10 @@
 function IMS_parallel_processing()
 %% IMS_parallel_processing.m
 % ═══════════════════════════════════════════════════════════════════════
-% PROCESAMIENTO PARALELO FINAL (v1.3.3)
+% PROCESAMIENTO PARALELO FINAL (v1.3.4 - SILENT MODE)
 % ═══════════════════════════════════════════════════════════════════════
 
     clc;
-    warning('off', 'MATLAB:mir_warning_variable_used_as_tmp');
     
     % --- CONFIGURACIÓN ---
     script_dir = fileparts(mfilename('fullpath'));
@@ -15,7 +14,7 @@ function IMS_parallel_processing()
     results_file = fullfile(project_root, 'results', 'resultados_diagnostico_paralelo.mat');
 
     fprintf('╔═══════════════════════════════════════════════════════════╗\n');
-    fprintf('║  PROCESAMIENTO PARALELO ROBUSTO (v1.3.3 - FIX TIPOS)    ║\n');
+    fprintf('║  PROCESAMIENTO PARALELO (v1.3.4 - SILENT MODE)          ║\n');
     fprintf('╚═══════════════════════════════════════════════════════════╝\n\n');
 
     % --- 1. CARGAR RECURSOS ---
@@ -59,6 +58,13 @@ function IMS_parallel_processing()
     p_count = 0;
     
     parfor i = 1:n_files
+        % --- FIX WARNINGS: Inicializar variables temporales ---
+        Yfit = [];
+        scores = [];
+        pred_str = ""; 
+        conf = 0;
+        % ----------------------------------------------------
+        
         try
             file_info = file_list(i);
             full_path = fullfile(file_info.folder, file_info.name);
@@ -79,7 +85,7 @@ function IMS_parallel_processing()
                 feat = [sqrt(mean(c1.^2)), sqrt(mean(c2.^2)), sqrt(mean(c3.^2)), ...
                         kurtosis(c1), kurtosis(c2), kurtosis(c3)];
                 
-                % --- PREDICCIÓN ROBUSTA (FIX v1.3.3) ---
+                % Predicción
                 if isa(RF_Model, 'TreeBagger') || isa(RF_Model, 'classreg.learning.classif.CompactClassificationEnsemble')
                     [Yfit, scores] = predict(RF_Model, feat);
                 elseif isstruct(RF_Model)
@@ -88,17 +94,17 @@ function IMS_parallel_processing()
                     error('Modelo desconocido');
                 end
 
-                % Manejar TODOS los tipos de salida posibles de predict()
+                % Manejo de Tipos
                 if iscell(Yfit)
-                    pred_str = string(Yfit{1});      % Caso Cell: {'normal'}
+                    pred_str = string(Yfit{1});
                 elseif iscategorical(Yfit)
-                    pred_str = string(char(Yfit));   % Caso Categorical
+                    pred_str = string(char(Yfit));
                 elseif isstring(Yfit)
-                    pred_str = Yfit(1);              % Caso String Array
+                    pred_str = Yfit(1);
                 elseif ischar(Yfit)
-                    pred_str = string(Yfit);         % Caso Char
+                    pred_str = string(Yfit);
                 else
-                    pred_str = string(Yfit);         % Fallback numérico
+                    pred_str = string(Yfit);
                 end
                 
                 conf = max(scores(1,:))*100;
@@ -117,7 +123,6 @@ function IMS_parallel_processing()
             filenames{i} = file_list(i).name;
             predictions{i} = "error_fatal"; 
             confidences(i) = 0;
-            % Solo imprimimos errores que NO sean el que ya corregimos
             if ~contains(ME.message, 'Cell contents reference')
                 fprintf('\n⚠️ Error en %s: %s\n', file_list(i).name, ME.message);
             end
